@@ -156,11 +156,11 @@ namespace Lab4_SD
         {
             Console.WriteLine("Enter the string: ");
             string s = Console.ReadLine();
-            string[] words = s.Split(new char[] { ' ', ',', '-', '.' }, StringSplitOptions.RemoveEmptyEntries);
+            string[] words = s.Split(new char[] {' '}, StringSplitOptions.RemoveEmptyEntries);
             int counter = 1;
             for (int i = 0; i < words.Length; i++)
             {
-                words[i] = words[i].Insert(words[i].Length, "(" + (counter) + ")");
+                words[i] = words[i].Insert(words[i].Length, "(" + (counter) + ") ");
                 counter++;
             }
             foreach (String str in words)
