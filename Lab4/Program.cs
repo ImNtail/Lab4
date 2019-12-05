@@ -272,9 +272,29 @@ namespace Lab4_SD
 		}
 		static void second_way_4()
         {
-			Console.WriteLine("Enter the string: ");
-            string s = Console.ReadLine();
-
+			int length = 7, number;
+			string[] s = new string[length];
+			string[] sLower = new string[length];
+			for (int i = 0; i < s.Length; i++)
+			{
+				number = i+1;
+				Console.Write(number + ". ");
+			 	Console.WriteLine("Enter the string: ");
+			 	s[i] = Console.ReadLine();
+			 	Console.WriteLine();
+			 	sLower[i] = s[i].ToLower();
+			}
+			Console.WriteLine();
+			Console.WriteLine("Strings that contains \".com\":\n");
+			for (int i = 0; i < s.Length; i++)
+			{
+				if (sLower[i].EndsWith(".com"))
+				{
+					number = i+1;
+					Console.Write(number + ". ");
+					Console.WriteLine(s[i] + "\n");
+				}
+			}
 		}
     }
 }
