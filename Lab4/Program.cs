@@ -1,4 +1,5 @@
 using System;
+
 namespace Lab4_SD
 {
 	class Program
@@ -30,7 +31,7 @@ namespace Lab4_SD
 					break;
 				case 5:
 					Console.WriteLine("The fifth task: \n");
-					//                    fifth();
+					fifth();
 					break;
 				case 6:
 					Console.WriteLine("The sixth task: \n");
@@ -135,17 +136,20 @@ namespace Lab4_SD
         }
         static void first_way_2()
         {
+        	int counter = 0;
             Console.WriteLine("Enter the string: ");
             string s = Console.ReadLine();
             for (int i = 0; i < s.Length; i++)
             {
-            	int counter = i + 1;
-            	if (s[i] == ' ' || s[i] == ',' || s[i] == '-' || s[i] == '.')
-            	    Console.Write(s[i]);
+            	if (Char.IsLetter(s[i]) && (s[i+1] == ' ' || s[i+1] == '-' || s[i+1] == '.' || s[i+1] == ','))
+            	{
+            		Console.Write("{0}({1})", s[i], ++counter);
+            	}
             	else
-            	Console.Write("{0}({1})", s[i], counter);
+            	{
+            		Console.Write(s[i]);
+            	}
             }
-            //Выводит число после каждой буквы. Как исправить?
             Console.WriteLine();
         }
         static void second_way_2()
@@ -295,6 +299,38 @@ namespace Lab4_SD
 					Console.WriteLine(s[i] + "\n");
 				}
 			}
+		}
+		
+		/*5. Ввести с клавиатуры текст. Программно найти в нем и вывести отдельно все
+		слова, которые начинаются с большого латинского символа (от A до Z) и
+		заканчиваются 2 цифрами, например «Petr93», «Johnny70», «Service02».
+		Решить 2 способами: через обработку строки как массива и с помощью
+		регулярных выражений.
+		*/
+		static void fifth()
+		{
+			Console.Write("Choose the way (Enter \"array\" or \"string\"): ");
+            string way = Console.ReadLine();
+            switch (way)
+            {
+                case "array":
+                    first_way_5();
+                    break;
+                case "string":
+                    second_way_5();
+                    break;
+                default:
+                    break;
+            }
+            Console.ReadKey();
+		}
+		static void first_way_5()
+        {
+			
+		}
+		static void second_way_5()
+        {
+			
 		}
     }
 }
