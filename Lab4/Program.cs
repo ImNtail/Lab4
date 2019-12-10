@@ -160,13 +160,20 @@ namespace Lab4_SD
             int counter = 1;
             for (int i = 0; i < words.Length; i++)
             {
-                words[i] = words[i].Insert(words[i].Length, "(" + (counter) + ") ");
+            	if (words[i].EndsWith(",") || words[i].EndsWith("."))
+            	{
+                	words[i] = words[i].Insert(words[i].Length, "(" + (counter) + ")");
+            	}
+            	else if (words[i] == "-" || words[i] == " ") continue;
+            	else
+            	{
+            		words[i] = words[i].Insert(words[i].Length, "(" + (counter) + ") ");
+            	}
                 counter++;
             }
             foreach (String str in words)
             	Console.Write(str);
             Console.WriteLine();
-            //Выводит слова подряд без разделения. Числа указываются правильно. Как расставить знаки, как в начальном предложении?
         }
         
         /*
@@ -203,14 +210,21 @@ namespace Lab4_SD
             		counterOfwords++;
             }
             char[] chars = s.ToCharArray();
+            char[] tempChars = s.ToCharArray();
             string[] output = new string[counterOfwords+1];
             for (int i = 0; i < output.Length; i++)
             {
-            	for (int j = 0; j < chars.Length; j++)
+            	for (int j = 0; j < tempChars.Length; j++)
             	{
-            		output[i] += chars[j];
-            		if (chars[j] == ' ')
+            		output[i] += tempChars[j];
+            		if (tempChars[j] == ' ')
             		{
+            			Array.Clear(tempChars, 0, tempChars.Length);
+            			Array.Copy(chars, j + 1, tempChars, 0, tempChars.Length - j - 1);
+            			for (int q = j + 1; q < tempChars.Length; q++)
+            			{
+            				chars[q] = tempChars[q];
+            			}	
             			break;
             		}
             	}
@@ -220,7 +234,6 @@ namespace Lab4_SD
             {
             	Console.Write(output[i] + " ");
             }
-            //Выводит в обратном порядке, столько слов, сколько нужно, но все слова - первое слово. Как пропускать использованный пробел?
 		}
 		static void second_way_3()
         {
@@ -272,7 +285,12 @@ namespace Lab4_SD
 			 	Console.WriteLine("Enter the string: ");
 			 	s[i] = Console.ReadLine();
 			}
-			
+			char[][] chars = new char[length][];
+			for (int i = 0; i < chars.Length; i++)
+			{
+				chars[i] = s[i];
+			}
+			//не сделано.
 		}
 		static void second_way_4()
         {
