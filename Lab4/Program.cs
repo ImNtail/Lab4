@@ -285,12 +285,18 @@ namespace Lab4_SD
 			 	Console.WriteLine("Enter the string: ");
 			 	s[i] = Console.ReadLine();
 			}
-			char[][] chars = new char[length][];
-			for (int i = 0; i < chars.Length; i++)
+			foreach (string str in s)
 			{
-				chars[i] = s[i];
+				str.ToLower();
+				char[] chars = str.ToCharArray();
+				for (int i = 0; i < str.Length; i++)
+				{
+					if (chars[i] == '.' && chars[i+1] == 'c' && chars[i+2] == 'o' && chars[i+3] == 'm' && chars[i+4] == ' ' || chars[i+4] == '.' || chars[i+4] == ',' || chars[i+4].Equals(""))
+					{
+						Console.WriteLine(str);
+					}
+				}
 			}
-			//не сделано.
 		}
 		static void second_way_4()
         {
