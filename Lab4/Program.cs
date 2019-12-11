@@ -1,4 +1,5 @@
 using System;
+using System.Text.RegularExpressions;
 
 namespace Lab4_SD
 {
@@ -289,6 +290,7 @@ namespace Lab4_SD
 			{
 				str.ToLower();
 				char[] chars = str.ToCharArray();
+				Console.WriteLine();
 				for (int i = 0; i < str.Length; i++)
 				{
 					if (chars[i] == '.' && chars[i+1] == 'c' && chars[i+2] == 'o' && chars[i+3] == 'm' && chars[i+4] == ' ' || chars[i+4] == '.' || chars[i+4] == ',' || chars[i+4].Equals(""))
@@ -297,6 +299,7 @@ namespace Lab4_SD
 					}
 				}
 			}
+			//как сделать, чтоб не выдавало OutOfRange
 		}
 		static void second_way_4()
         {
@@ -314,7 +317,7 @@ namespace Lab4_SD
 			}
 			Console.WriteLine();
 			Console.WriteLine("Strings that contains \".com\":\n");
-			for (int i = 0; i < s.Length; i++)
+			for (int i = 0; i < sLower.Length; i++)
 			{
 				if (sLower[i].EndsWith(".com"))
 				{
@@ -323,6 +326,20 @@ namespace Lab4_SD
 					Console.WriteLine(s[i] + "\n");
 				}
 			}
+			Console.WriteLine();
+			int spaces = s[0].LastIndexOf(" ");
+			int numOfStr = 0;
+			for (int i = 0; i < s.Length; i++)
+			{
+				if (spaces > s[i].LastIndexOf(" "))
+				{
+				    spaces = s[i].LastIndexOf(" ");
+				    numOfStr = i;
+			    }
+			}
+			Console.WriteLine("String with the smallest number of spaces: ");
+			Console.WriteLine(s[numOfStr]);
+			//непонятно что произошло, работает криво
 		}
 		
 		/*5. Ввести с клавиатуры текст. Программно найти в нем и вывести отдельно все
@@ -333,14 +350,14 @@ namespace Lab4_SD
 		*/
 		static void fifth()
 		{
-			Console.Write("Choose the way (Enter \"array\" or \"string\"): ");
+			Console.Write("Choose the way (Enter \"array\" or \"regular\"): ");
             string way = Console.ReadLine();
             switch (way)
             {
                 case "array":
                     first_way_5();
                     break;
-                case "string":
+                case "regular":
                     second_way_5();
                     break;
                 default:
@@ -350,10 +367,45 @@ namespace Lab4_SD
 		}
 		static void first_way_5()
         {
-			
+			Console.WriteLine("Enter the string: ");
+            string s = Console.ReadLine();
+            Console.WriteLine();
+			string[] words = s.Split(new char[] {' '}, StringSplitOptions.RemoveEmptyEntries);
+			for (int i = 0; i < words.Length; i++) 
+			{
+				string word = words[i];
+				if (Char.IsUpper(word[0]) && Char.IsNumber(word[word.Length - 1]) && Char.IsNumber(word[word.Length-2])) 
+				{
+					Console.WriteLine(words[i]);
+				}
+			}
 		}
 		static void second_way_5()
         {
+			Console.WriteLine("Enter the string: ");
+            string s = Console.ReadLine();
+            Console.WriteLine();
+            Regex regex = new Regex(@"\b[A-Z](\w*)+\d{2}\b");
+			MatchCollection words = regex.Matches(s);
+			if (words.Count > 0)
+			{
+				foreach (Match match in words)
+					Console.WriteLine(match.Value);
+			}
+			else
+			{
+				Console.WriteLine("There is no such words.");
+			}
+		}
+		
+		/*
+		6. Ввести строку вида « 15 + 36 = 51 » (количество пробелов может быть
+		разным, числа – целые и могут быть отрицательны). С помощью регулярных
+		выражений разобрать эту строку и занести в переменные типа int оба
+		операнда и сумму. Вывести все переменные на консоль.
+		*/
+		static void sixth()
+		{
 			
 		}
     }
