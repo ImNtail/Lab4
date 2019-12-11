@@ -36,7 +36,7 @@ namespace Lab4_SD
 					break;
 				case 6:
 					Console.WriteLine("The sixth task: \n");
-					//                    sixth();
+					sixth();
 					break;
 				case 7:
 					Console.WriteLine("The seventh task: \n");
@@ -406,7 +406,16 @@ namespace Lab4_SD
 		*/
 		static void sixth()
 		{
-			
+			Console.WriteLine("Enter the string such as «15 + 36 = 51»: ");
+			string s = Console.ReadLine();
+			Regex numbers = new Regex(@"((-?\d)[+*\/^-]|[()]|\-?[\d.]+)");
+			MatchCollection nums = numbers.Matches(s);
+			foreach (Match match in nums)
+			{
+				int num = int.Parse(match.Value);
+				Console.Write(num + "  ");
+			}
+			Console.ReadKey();
 		}
     }
 }
