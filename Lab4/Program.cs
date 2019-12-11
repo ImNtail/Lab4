@@ -40,7 +40,7 @@ namespace Lab4_SD
 					break;
 				case 7:
 					Console.WriteLine("The seventh task: \n");
-					//                    seventh();
+					seventh();
 					break;
 				case 8:
 					Console.WriteLine("The eighth task: \n");
@@ -408,7 +408,7 @@ namespace Lab4_SD
 		{
 			Console.WriteLine("Enter the string such as «15 + 36 = 51»: ");
 			string s = Console.ReadLine();
-			Regex numbers = new Regex(@"((-?\d)[+*\/^-]|[()]|\-?[\d.]+)");
+			Regex numbers = new Regex(@"((-?\d)[+*/-]|[()]|(-?[\d.]+))");
 			MatchCollection nums = numbers.Matches(s);
 			foreach (Match match in nums)
 			{
@@ -416,6 +416,28 @@ namespace Lab4_SD
 				Console.Write(num + "  ");
 			}
 			Console.ReadKey();
+		}
+		
+		/*
+		7. Дан треклист – массив из 10 строк следующего вида:
+		1. Gentle Giant – Free Hand [6:15]
+		2. Supertramp – Child Of Vision [07:27]
+		3. Camel – Lawrence [10:46]
+		4. Yes – Don’t Kill The Whale [3:55]
+		5. 10CC – Notell Hotel [04:58]
+		6. Nektar – King Of Twilight [4:16]
+		7. The Flower Kings – Monsters & Men [21:19]
+		8. Focus – Le Clochard [1:59]
+		9. Pendragon – Fallen Dream And Angel [5:23]
+		10. Kaipa – Remains Of The Day (08:02)
+		Написать программу, которая обрабатывает весь треклист, суммирует время
+		звучания песен и выводит результат на экран, а также отображает самую
+		длинную и самую короткую песню в списке и пару песен с минимальной
+		разницей во времени звучания.
+		*/
+		static void seventh()
+		{
+			
 		}
     }
 }
