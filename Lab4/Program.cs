@@ -408,7 +408,7 @@ namespace Lab4_SD
 		{
 			Console.WriteLine("Enter the string such as «15 + 36 = 51»: ");
 			string s = Console.ReadLine();
-			Regex numbers = new Regex(@"((-?\d)[+*/-]|[()]|(-?[\d.]+))");
+			Regex numbers = new Regex(@"(-?\d)[+*/-]|[()]|(-?[\d.]+)");
 			MatchCollection nums = numbers.Matches(s);
 			foreach (Match match in nums)
 			{
@@ -437,7 +437,61 @@ namespace Lab4_SD
 		*/
 		static void seventh()
 		{
-			
+			string[] trackList = new string[10];
+			trackList[0] = "Gentle Giant – Free Hand [06:15]";
+			trackList[1] = "Supertramp – Child Of Vision [07:27]";
+			trackList[2] = "Camel – Lawrence [10:46]";
+			trackList[3] = "Yes – Don’t Kill The Whale [03:55]";
+			trackList[4] = "10CC – Notell Hotel [04:58]";
+			trackList[5] = "Nektar – King Of Twilight [04:16]";
+			trackList[6] = "The Flower Kings – Monsters & Men [21:19]";
+			trackList[7] = "Focus – Le Clochard [01:59]";
+			trackList[8] = "Pendragon – Fallen Dream And Angel [05:23]";
+			trackList[9] = "Kaipa – Remains Of The Day [08:02]";
+			int digitMin = 0;
+			int digitSec = 0;
+			decimal sum = 0;
+			int[] duration = new int[trackList.Length];
+			int minDuration = 0, maxDuration = 0;
+			foreach (string str in trackList)
+			{
+				Console.WriteLine(str);
+				Console.WriteLine();
+				Regex minutes = new Regex(@"(\d{2})(?=:)");
+				Regex seconds = new Regex(@"(?<=:)(\d{2})");
+				MatchCollection min = minutes.Matches(str);
+				MatchCollection sec = seconds.Matches(str);
+				foreach (Match m in min)
+				{
+					digitMin = int.Parse(m.Value);
+					Console.WriteLine("Minutes: " + digitMin);
+					sum += digitMin*60;
+				}
+				foreach (Match s in sec)
+				{
+					digitSec = int.Parse(s.Value);
+					Console.WriteLine("Seconds: " + digitSec);
+					sum += digitSec;
+				}
+				Console.WriteLine();
+				for (int i = 0; i < trackList.Length; i++) 
+				{
+					if (duration[minDuration] > duration[i]) 
+					{
+						minDuration = i;
+					}
+	
+					if (duration[maxDuration] < duration[i]) 
+					{
+						maxDuration = i;
+					}
+				}
+			}
+			Console.WriteLine();
+			Console.WriteLine("Summary time is " + sum + " sec");
+			Console.WriteLine("The shortest song: " + trackList[minDuration]);
+			Console.WriteLine("The longest song: " + trackList[maxDuration]);
+			Console.ReadKey();
 		}
     }
 }
