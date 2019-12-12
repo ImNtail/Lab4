@@ -44,15 +44,15 @@ namespace Lab4_SD
 					break;
 				case 8:
 					Console.WriteLine("The eighth task: \n");
-					//                    eighth();
+					eighth();
 					break;
 				case 9:
 					Console.WriteLine("The first individual task: \n");
-					//                    ninth();
+					ninth();
 					break;
 				case 10:
 					Console.WriteLine("The second individual task: \n");
-					//                    tenth();
+					tenth();
 					break;
 				default:
 					break;
@@ -408,7 +408,7 @@ namespace Lab4_SD
 		{
 			Console.WriteLine("Enter the string such as «15 + 36 = 51»: ");
 			string s = Console.ReadLine();
-			Regex numbers = new Regex(@"(-?\d)[+*/-]|[()]|(-?[\d.]+)");
+			Regex numbers = new Regex(@"-?\d+");
 			MatchCollection nums = numbers.Matches(s);
 			foreach (Match match in nums)
 			{
@@ -451,8 +451,6 @@ namespace Lab4_SD
 			int digitMin = 0;
 			int digitSec = 0;
 			decimal sum = 0;
-			int[] duration = new int[trackList.Length];
-			int minDuration = 0, maxDuration = 0;
 			foreach (string str in trackList)
 			{
 				Console.WriteLine(str);
@@ -474,24 +472,76 @@ namespace Lab4_SD
 					sum += digitSec;
 				}
 				Console.WriteLine();
-				for (int i = 0; i < trackList.Length; i++) 
-				{
-					if (duration[minDuration] > duration[i]) 
-					{
-						minDuration = i;
-					}
-	
-					if (duration[maxDuration] < duration[i]) 
-					{
-						maxDuration = i;
-					}
-				}
 			}
 			Console.WriteLine();
 			Console.WriteLine("Summary time is " + sum + " sec");
-			Console.WriteLine("The shortest song: " + trackList[minDuration]);
-			Console.WriteLine("The longest song: " + trackList[maxDuration]);
 			Console.ReadKey();
+		}
+		
+		/*
+		1. Написать программу, позволяющую шифровать и расшифровывать строки
+		символов на основе 3 симметричных алгоритмов шифрования.
+		Шифр Атбаш
+		Шифр Вернама
+		Шифр простой одинарной перестановки
+		*/
+		static void eighth()
+		{
+			Console.Write("Choose encryption(1) or decryption(2): ");
+			string s = Console.ReadLine();
+			if (s == "1")
+				encryption();
+			if (s == "2")
+				decryption();
+		}
+		static void encryption()
+		{
+			Console.WriteLine("Enter the text: ");
+			string s = Console.ReadLine();
+		}
+		static void decryption()
+		{
+			Console.WriteLine("Enter the text: ");
+			string s = Console.ReadLine();
+		}
+		
+		/*
+		2. Написать программу обработки текста, в соответствии с вариантом. Решить
+		задачу 2 способами: через обработку строки как массива символов и с
+		помощью методов классов string и/или StringBuilder.
+		Вариант 1
+		Ввести с клавиатуры текст. Сформировать новую строку из исходной путем удаления из нее всех
+		слов, которые начинаются с того же символа, которым и заканчиваются (независимо от регистра).
+		*/
+		static void ninth()
+		{
+			Console.Write("Choose array of symbols(1) or string method(2): ");
+			string s = Console.ReadLine();
+			if (s == "1")
+				arrayOfSymbols();
+			if (s == "2")
+				stringMethod();
+		}
+		static void arrayOfSymbols()
+		{
+			Console.WriteLine("Enter the text: ");
+			string s = Console.ReadLine();
+		}
+		static void stringMethod()
+		{
+			Console.WriteLine("Enter the text: ");
+			string s = Console.ReadLine();
+		}
+		
+		/*
+		3. Написать регулярные выражения для поиска подстроки в строке по правилу
+		или шаблону, в соответствии с вариантом.
+		Вариант 1
+		Найти в тексте все даты – подстроки вида «11-05-2014».
+		*/
+		static void tenth()
+		{
+			
 		}
     }
 }
