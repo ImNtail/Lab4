@@ -293,7 +293,7 @@ namespace Lab4_SD
 				Console.WriteLine();
 				for (int i = 0; i < str.Length; i++)
 				{
-					if (chars[i] == '.' && chars[i+1] == 'c' && chars[i+2] == 'o' && chars[i+3] == 'm' && chars[i+4] == ' ' || chars[i+4] == '.' || chars[i+4] == ',' || chars[i+4].Equals(""))
+					if (i < str.Length-4 && (chars[i] == '.' && chars[i+1] == 'c' && chars[i+2] == 'o' && chars[i+3] == 'm') && chars[i+4] == ' ' || chars[i+4] == '.' || chars[i+4] == ',' || chars[i+4].Equals(""))
 					{
 						Console.WriteLine(str);
 					}
