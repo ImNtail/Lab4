@@ -291,9 +291,9 @@ namespace Lab4_SD
 				str.ToLower();
 				char[] chars = str.ToCharArray();
 				Console.WriteLine();
-				for (int i = 0; i < str.Length; i++)
+				for (int i = 0; i < chars.Length; i++)
 				{
-					if (i < str.Length-4 && (chars[i] == '.' && chars[i+1] == 'c' && chars[i+2] == 'o' && chars[i+3] == 'm') && chars[i+4] == ' ' || chars[i+4] == '.' || chars[i+4] == ',' || chars[i+4].Equals(""))
+					if (i < chars.Length-4 && (chars[i] == '.' && chars[i+1] == 'c' && chars[i+2] == 'o' && chars[i+3] == 'm') && chars[i+4] == ' ' || chars[i+4] == '.' || chars[i+4] == ',' || chars[i+4].Equals(""))
 					{
 						Console.WriteLine(str);
 					}
@@ -526,11 +526,21 @@ namespace Lab4_SD
 		{
 			Console.WriteLine("Enter the text: ");
 			string s = Console.ReadLine();
+			char[] chars = s.ToCharArray();
+			
 		}
 		static void stringMethod()
 		{
 			Console.WriteLine("Enter the text: ");
 			string s = Console.ReadLine();
+			string[] words = s.Split(new char[] {' ', ',', '.'});
+			for (int i = 0; i < words.Length; i++)
+			{
+				if ()
+				{
+					
+				}
+			}
 		}
 		
 		/*
@@ -541,7 +551,15 @@ namespace Lab4_SD
 		*/
 		static void tenth()
 		{
-			
+			Console.WriteLine("Enter the text: ");
+			string s = Console.ReadLine();
+			Regex data = new Regex(@"(\b\d{2}-\d{2}-\d{4}\b)");
+			MatchCollection matches = data.Matches(s);
+			foreach (Match match in matches)
+			{
+				Console.WriteLine(match.Value);
+			}
+			Console.ReadKey();
 		}
     }
 }
