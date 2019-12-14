@@ -291,9 +291,9 @@ namespace Lab4_SD
 				str.ToLower();
 				char[] chars = str.ToCharArray();
 				Console.WriteLine();
-				for (int i = 0; i < chars.Length; i++)
+				for (int i = 0; i < chars.Length-4; i++)
 				{
-					if (i < chars.Length-4 && (chars[i] == '.' && chars[i+1] == 'c' && chars[i+2] == 'o' && chars[i+3] == 'm') && chars[i+4] == ' ' || chars[i+4] == '.' || chars[i+4] == ',' || chars[i+4].Equals(""))
+					if ((chars[i] == '.' && chars[i+1] == 'c' && chars[i+2] == 'o' && chars[i+3] == 'm') && chars[i+4] == ' ' || chars[i+4] == '.' || chars[i+4] == ',' || chars[i+4].Equals(""))
 					{
 						Console.WriteLine(str);
 					}
@@ -319,11 +319,15 @@ namespace Lab4_SD
 			Console.WriteLine("Strings that contains \".com\":\n");
 			for (int i = 0; i < sLower.Length; i++)
 			{
-				if (sLower[i].EndsWith(".com"))
+				string[] sLowerWords = sLower[i].Split(new char[] {' '}, StringSplitOptions.RemoveEmptyEntries);
+				for (int j = 0; j < sLowerWords.Length; j++)
 				{
-					number = i+1;
-					Console.Write(number + ". ");
-					Console.WriteLine(s[i] + "\n");
+					if (sLowerWords[i].EndsWith(".com") || sLowerWords[i].EndsWith(".com.") || sLowerWords[i].EndsWith(".com,"))
+					{
+						number = i+1;
+						Console.Write(number + ". ");
+						Console.WriteLine(s[i] + "\n");
+					}
 				}
 			}
 			Console.WriteLine();
@@ -526,21 +530,27 @@ namespace Lab4_SD
 		{
 			Console.WriteLine("Enter the text: ");
 			string s = Console.ReadLine();
-			char[] chars = s.ToCharArray();
-			
+			string[] words = s.Split(new char[] {' ', ',', '.'});
+			foreach (string word in words)
+			{
+				char[] charWord = word.ToCharArray();
+			}
 		}
 		static void stringMethod()
 		{
 			Console.WriteLine("Enter the text: ");
 			string s = Console.ReadLine();
+			s = s.ToLower();
 			string[] words = s.Split(new char[] {' ', ',', '.'});
-			for (int i = 0; i < words.Length; i++)
+			foreach (string word in words)
 			{
-				if ()
+				if (word[0] == word[word.Length-1])
 				{
-					
+					s = s.Replace(word, "");
 				}
 			}
+			Console.WriteLine();
+			Console.WriteLine(s);
 		}
 		
 		/*
