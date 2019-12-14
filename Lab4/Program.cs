@@ -289,9 +289,14 @@ namespace Lab4_SD
 			number = 1;
 			foreach (string str in s)
 			{
-				str.ToLower();
-				char[] chars = str.ToCharArray();
+				string tempString = str.ToLower();
+				char[] chars = tempString.ToCharArray();
 				Console.WriteLine();
+				if (chars[chars.Length-1] == 'm' && chars[chars.Length-2] == 'o' && chars[chars.Length-3] == 'c' && chars[chars.Length-4] == '.')
+					{
+						Console.Write(number + ". ");
+						Console.WriteLine(str);
+					}
 				for (int i = 0; i < chars.Length; i++)
 				{
 					if (i < chars.Length-4)
