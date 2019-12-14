@@ -277,29 +277,34 @@ namespace Lab4_SD
 		}
 		static void first_way_4()
         {
-			int length = 7, number;
+			int length = 7, number = 1;
 			string[] s = new string[length];
 			for (int i = 0; i < s.Length; i++)
 			{
-				number = i+1;
 				Console.Write(number + ". ");
 			 	Console.WriteLine("Enter the string: ");
 			 	s[i] = Console.ReadLine();
+			 	number++;
 			}
+			number = 1;
 			foreach (string str in s)
 			{
 				str.ToLower();
 				char[] chars = str.ToCharArray();
 				Console.WriteLine();
-				for (int i = 0; i < chars.Length-4; i++)
+				for (int i = 0; i < chars.Length; i++)
 				{
-					if ((chars[i] == '.' && chars[i+1] == 'c' && chars[i+2] == 'o' && chars[i+3] == 'm') && chars[i+4] == ' ' || chars[i+4] == '.' || chars[i+4] == ',' || chars[i+4].Equals(""))
+					if (i < chars.Length-4)
 					{
-						Console.WriteLine(str);
+						if ((chars[i] == '.' && chars[i+1] == 'c' && chars[i+2] == 'o' && chars[i+3] == 'm') && (chars[i+4] == ' ' || chars[i+4] == '.' || chars[i+4] == ',' || chars[i+4].Equals("")))
+						{
+							Console.Write(number + ". ");
+							Console.WriteLine(str);
+						}
 					}
 				}
+				number++;
 			}
-			//как сделать, чтоб не выдавало OutOfRange
 		}
 		static void second_way_4()
         {
