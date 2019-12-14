@@ -530,11 +530,19 @@ namespace Lab4_SD
 		{
 			Console.WriteLine("Enter the text: ");
 			string s = Console.ReadLine();
+			s = s.ToLower();
 			string[] words = s.Split(new char[] {' ', ',', '.'});
 			foreach (string word in words)
 			{
 				char[] charWord = word.ToCharArray();
+				if (charWord[0] == charWord[charWord.Length-1])
+				{
+					s = s.Replace(word, "");
+				}
 			}
+			Console.WriteLine();
+			Console.WriteLine(s);
+			Console.ReadKey();
 		}
 		static void stringMethod()
 		{
