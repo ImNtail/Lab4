@@ -465,6 +465,10 @@ namespace Lab4_SD
 			int digitMin = 0;
 			int digitSec = 0;
 			decimal sum = 0;
+			string shortestSong = string.Empty;
+			string longestSong = string.Empty;
+            int minDuration = int.MaxValue, maxDuration = 0;
+            
 			foreach (string str in trackList)
 			{
 				Console.WriteLine(str);
@@ -486,9 +490,24 @@ namespace Lab4_SD
 					sum += digitSec;
 				}
 				Console.WriteLine();
+				
+				if (digitMin > maxDuration)
+                {
+                    maxDuration = digitMin;
+                    longestSong = str;
+                }
+                if (digitMin < minDuration)
+                {
+                    minDuration = digitMin;
+                    shortestSong = str;
+                }
 			}
+
 			Console.WriteLine();
 			Console.WriteLine("Summary time is " + sum + " sec");
+			Console.WriteLine("The shortest song is " + shortestSong);
+			Console.WriteLine("The longest song is " + longestSong);
+			Console.WriteLine("Songs that have minimal difference of durations: {0} and {1}");
 			Console.ReadKey();
 		}
 		
@@ -512,6 +531,21 @@ namespace Lab4_SD
 		{
 			Console.WriteLine("Enter the text: ");
 			string s = Console.ReadLine();
+			s = s.ToLower();
+			Console.WriteLine("Atbash cipher encryption: ");
+			string alphabet = "abcdefghijklmnopqrstuvwxyz";
+			int lengthOfString = 0;
+			while (lengthOfString <= s.Length)
+			{
+				for(int i = 0; i < alphabet.Length; i++)
+				{
+					s = s.Replace(alphabet[i], alphabet[alphabet.Length-1-i]);
+				}
+				lengthOfString++;
+			}
+			Console.WriteLine(s);
+			Console.WriteLine();
+			Console.ReadKey();
 		}
 		static void decryption()
 		{
