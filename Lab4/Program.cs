@@ -468,15 +468,16 @@ namespace Lab4_SD
 			string shortestSong = string.Empty;
 			string longestSong = string.Empty;
             int minDuration = int.MaxValue, maxDuration = 0;
-            
-			foreach (string str in trackList)
+            int[] durations = new int[trackList.Length];
+            int minDifference = int.MaxValue, firstTrackIndex = 0, secondTrackIndex = 0;
+            for (int i = 0; i < trackList.Length; i++)
 			{
-				Console.WriteLine(str);
+            	Console.WriteLine(trackList[i]);
 				Console.WriteLine();
 				Regex minutes = new Regex(@"(\d{2})(?=:)");
 				Regex seconds = new Regex(@"(?<=:)(\d{2})");
-				MatchCollection min = minutes.Matches(str);
-				MatchCollection sec = seconds.Matches(str);
+				MatchCollection min = minutes.Matches(trackList[i]);
+				MatchCollection sec = seconds.Matches(trackList[i]);
 				foreach (Match m in min)
 				{
 					digitMin = int.Parse(m.Value);
@@ -494,20 +495,36 @@ namespace Lab4_SD
 				if (digitMin > maxDuration)
                 {
                     maxDuration = digitMin;
-                    longestSong = str;
+                    longestSong = trackList[i];
                 }
                 if (digitMin < minDuration)
                 {
                     minDuration = digitMin;
-                    shortestSong = str;
+                    shortestSong = trackList[i];
                 }
+                durations[i] = digitMin * 60 + digitSec;
 			}
-
+            for (int q = 0; q < durations.Length; q++)
+			{
+	            for (int w = 0; w < durations.Length; w++)
+	            {
+	                if (q == w)
+	                {
+	                    continue;
+	                }
+	                if (Math.Abs(durations[q] - durations[w]) < minDifference)
+	                {
+	                	firstTrackIndex = q;
+	                	secondTrackIndex = w;
+	                    minDifference = Math.Abs(durations[q] - durations[w]);
+	                }
+	            }
+            }
 			Console.WriteLine();
 			Console.WriteLine("Summary time is " + sum + " sec");
 			Console.WriteLine("The shortest song is " + shortestSong);
 			Console.WriteLine("The longest song is " + longestSong);
-			Console.WriteLine("Songs that have minimal difference of durations: {0} and {1}");
+			Console.WriteLine("Songs that have minimal difference of durations: {0} and {1}", trackList[firstTrackIndex], trackList[secondTrackIndex]);
 			Console.ReadKey();
 		}
 		
@@ -532,18 +549,26 @@ namespace Lab4_SD
 			Console.WriteLine("Enter the text: ");
 			string s = Console.ReadLine();
 			s = s.ToLower();
+			char[] charsString = s.ToCharArray();
 			Console.WriteLine("Atbash cipher encryption: ");
 			string alphabet = "abcdefghijklmnopqrstuvwxyz";
-			int lengthOfString = 0;
-			while (lengthOfString <= s.Length)
-			{
+//			int lengthOfString = 0;
+//			while (lengthOfString <= s.Length)
+//			{
 				for(int i = 0; i < alphabet.Length; i++)
 				{
-					s = s.Replace(alphabet[i], alphabet[alphabet.Length-1-i]);
+//					s = s.Replace(alphabet[i], alphabet[alphabet.Length-1-i]);
+					for (int j = 0; j < s.Length; j++)
+					{
+						if (charsString[j] == alphabet[i])
+						{
+							charsString[j] = alphabet[alphabet.Length-1-i];
+						}
+					}
 				}
-				lengthOfString++;
-			}
-			Console.WriteLine(s);
+//				lengthOfString++;
+//			}
+			Console.WriteLine(charsString);
 			Console.WriteLine();
 			Console.ReadKey();
 		}
