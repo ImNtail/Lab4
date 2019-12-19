@@ -537,46 +537,72 @@ namespace Lab4_SD
 		*/
 		static void eighth()
 		{
-			Console.Write("Choose encryption(1) or decryption(2): ");
+			Console.Write("Choose Atbash cipher(1), Vernam cipher(2) or simple single permutation cipher(3): ");
 			string s = Console.ReadLine();
 			if (s == "1")
-				encryption();
+				atbash();
 			if (s == "2")
-				decryption();
+				vernam();
+			if (s == "3")
+				permutation();
 		}
-		static void encryption()
+		static void atbash()
 		{
 			Console.WriteLine("Enter the text: ");
 			string s = Console.ReadLine();
 			s = s.ToLower();
-			char[] charsString = s.ToCharArray();
-			Console.WriteLine("Atbash cipher encryption: ");
-			string alphabet = "abcdefghijklmnopqrstuvwxyz";
-//			int lengthOfString = 0;
-//			while (lengthOfString <= s.Length)
-//			{
-				for(int i = 0; i < alphabet.Length; i++)
-				{
-//					s = s.Replace(alphabet[i], alphabet[alphabet.Length-1-i]);
-					for (int j = 0; j < s.Length; j++)
-					{
-						if (charsString[j] == alphabet[i])
-						{
-							charsString[j] = alphabet[alphabet.Length-1-i];
-						}
-					}
-				}
-//				lengthOfString++;
-//			}
-			Console.WriteLine(charsString);
 			Console.WriteLine();
+			string output = string.Empty;
+			foreach (char ch in s)
+			{
+				if (char.IsLetter(ch))
+				{
+					output += (char)(219-ch);
+				}
+				else
+				{
+					output += ch;
+				}
+			}
+			Console.WriteLine(output);
 			Console.ReadKey();
 		}
-		static void decryption()
+		static void vernam()
 		{
 			Console.WriteLine("Enter the text: ");
 			string s = Console.ReadLine();
+			s = s.ToLower();
+			Console.WriteLine("Enter the key: ");
+			string key = Console.ReadLine();
+			if (key.Length != s.Length)
+				return;
+			string vernamCipherText = string.Empty;
+			for (int i = 0; i < s.Length; i++)
+			{
+				vernamCipherText += (char)(s[i] ^ key[i]);
+			}
+			//Example:	cipher    (key: qwerty)-->    ↕▲§→◄♂	
+			Console.WriteLine(vernamCipherText);
+			Console.ReadKey();
 		}
+		static void permutation()
+		{
+			Console.WriteLine("Enter the text: ");
+			string s = Console.ReadLine();
+			s = s.ToLower();
+			Console.WriteLine("Enter the key: ");
+			string permutationKey = Console.ReadLine();
+			string permutatuionOutput = string.Empty;
+			for (int i = 0; i < s.Length; i++)
+			{
+				string chKey = permutationKey[i].ToString();
+				int digitKey = int.Parse(chKey) - 1;
+				permutatuionOutput += s[digitKey];
+			}
+			Console.WriteLine(permutatuionOutput);
+			Console.ReadKey();
+		}
+		
 		
 		/*
 		2. Написать программу обработки текста, в соответствии с вариантом. Решить
