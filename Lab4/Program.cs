@@ -68,22 +68,22 @@ namespace Lab4_SD
 		 */
 		static void first()
 		{
+			Console.WriteLine("Enter the string: ");
+            string s = Console.ReadLine().ToLower();
 			Console.Write("Choose the way (Enter \"array\" or \"string\"): ");
 			string way = Console.ReadLine();
 			switch (way) {
 				case "array":
-					first_way();
+					first_way(s);
 					break;
 				case "string":
-					second_way();
+					second_way(s);
 					break;
 			}
 			Console.ReadKey();
 		}
-		static void first_way()
+		static void first_way(string s)
         {
-            Console.WriteLine("Enter the string: ");
-            string s = Console.ReadLine().ToLower();
             for (int i = 0; i < s.Length; i++)
             {
                 int n = 0;
@@ -98,10 +98,8 @@ namespace Lab4_SD
                     Console.Write(s[i] + " ");
             }
         }
-        static void second_way()
+        static void second_way(string s)
         {
-            Console.WriteLine("Enter the string: ");
-            string s = Console.ReadLine().ToLower();
             for (int i = 0; i < s.Length; i++)
             {
             	if (s.IndexOf(s[i]) == s.LastIndexOf(s[i]))
@@ -120,26 +118,26 @@ namespace Lab4_SD
 		 */
 		static void second()
         {
+			Console.WriteLine("Enter the string: ");
+            string s = Console.ReadLine();
             Console.Write("Choose the way (Enter \"array\" or \"string\"): ");
             string way = Console.ReadLine();
             switch (way)
             {
                 case "array":
-                    first_way_2();
+                    first_way_2(s);
                     break;
                 case "string":
-                    second_way_2();
+                    second_way_2(s);
                     break;
                 default:
                     break;
             }
             Console.ReadKey();
         }
-        static void first_way_2()
+        static void first_way_2(string s)
         {
         	int counter = 0;
-            Console.WriteLine("Enter the string: ");
-            string s = Console.ReadLine();
             for (int i = 0; i < s.Length; i++)
             {
             	if (Char.IsLetter(s[i]) && (s[i+1] == ' ' || s[i+1] == '-' || s[i+1] == '.' || s[i+1] == ','))
@@ -153,10 +151,8 @@ namespace Lab4_SD
             }
             Console.WriteLine();
         }
-        static void second_way_2()
+        static void second_way_2(string s)
         {
-            Console.WriteLine("Enter the string: ");
-            string s = Console.ReadLine();
             string[] words = s.Split(new char[] {' '}, StringSplitOptions.RemoveEmptyEntries);
             int counter = 1;
             for (int i = 0; i < words.Length; i++)
@@ -185,61 +181,49 @@ namespace Lab4_SD
 		*/
 		static void third()
 		{
+			Console.WriteLine("Enter the string: ");
+            string s = Console.ReadLine();
 			Console.Write("Choose the way (Enter \"array\" or \"string\"): ");
             string way = Console.ReadLine();
             switch (way)
             {
                 case "array":
-                    first_way_3();
+                    first_way_3(s);
                     break;
                 case "string":
-                    second_way_3();
+                    second_way_3(s);
                     break;
                 default:
                     break;
             }
             Console.ReadKey();
 		}
-		static void first_way_3()
+		static void first_way_3(string s)
         {
-		 	Console.WriteLine("Enter the string: ");
-            string s = Console.ReadLine();
-            int counterOfwords = 0;
-            foreach (char ch in s)
-            {
-            	if (ch == ' ')
-            		counterOfwords++;
-            }
-            char[] chars = s.ToCharArray();
-            char[] tempChars = s.ToCharArray();
-            string[] output = new string[counterOfwords+1];
-            for (int i = 0; i < output.Length; i++)
-            {
-            	for (int j = 0; j < tempChars.Length; j++)
-            	{
-            		output[i] += tempChars[j];
-            		if (tempChars[j] == ' ')
-            		{
-            			Array.Clear(tempChars, 0, tempChars.Length);
-            			Array.Copy(chars, j + 1, tempChars, 0, tempChars.Length - j - 1);
-            			for (int q = j + 1; q < tempChars.Length; q++)
-            			{
-            				chars[q] = tempChars[q];
-            			}	
-            			break;
-            		}
-            	}
-            }
-            Array.Reverse(output);
-            for (int i = 0; i < output.Length; i++)
-            {
-            	Console.Write(output[i] + " ");
-            }
+			string[] words = new string[s.Length];
+			char[] trigger = {' '};
+			int counter = 0;
+			for (int i = 0; i < s.Length; i = s.IndexOfAny(trigger, i) + 1)
+			{
+				if (counter == 0)
+				{
+					s += " ";
+				}
+				for (int j = i; j != s.IndexOfAny(trigger, i) && j < s.Length; j++)
+				{
+					words[counter] += s[j];
+				}
+				counter++;
+			}
+			Array.Resize(ref words, counter);
+			Array.Reverse(words);
+			foreach (string word in words)
+			{
+				Console.Write(word + " ");
+			}
 		}
-		static void second_way_3()
+		static void second_way_3(string s)
         {
-			Console.WriteLine("Enter the string: ");
-            string s = Console.ReadLine();
             string[] str = s.Split(new char[] {' ', '.'}, StringSplitOptions.RemoveEmptyEntries);
             Array.Reverse(str);
             for (int i = 0; i < str.Length; i++)
