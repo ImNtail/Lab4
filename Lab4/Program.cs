@@ -276,21 +276,29 @@ namespace Lab4_SD
 				string tempString = str.ToLower();
 				char[] chars = tempString.ToCharArray();
 				Console.WriteLine();
-				if (chars[chars.Length-1] == 'm' && chars[chars.Length-2] == 'o' && chars[chars.Length-3] == 'c' && chars[chars.Length-4] == '.')
+				if (chars.Length > 3 && chars[chars.Length-1] == 'm' && chars[chars.Length-2] == 'o' && chars[chars.Length-3] == 'c' && chars[chars.Length-4] == '.')
 					{
 						Console.Write(number + ". ");
 						Console.WriteLine(str);
 					}
+				else if (chars.Length > 4 && chars[chars.Length-1] == '.' && chars[chars.Length-2] == 'm' && chars[chars.Length-3] == 'o' && chars[chars.Length-4] == 'c' && chars[chars.Length-5] == '.')
+				{
+					Console.Write(number + ". ");
+					Console.WriteLine(str);
+				}
+				else
+				{
 				for (int i = 0; i < chars.Length; i++)
 				{
-					if (i < chars.Length-4)
+					if (i < chars.Length-5)
 					{
-						if ((chars[i] == '.' && chars[i+1] == 'c' && chars[i+2] == 'o' && chars[i+3] == 'm') && (chars[i+4] == ' ' || chars[i+4] == '.' || chars[i+4] == ',' || chars[i+4].Equals("")))
+						if ((chars[i] == '.' && chars[i+1] == 'c' && chars[i+2] == 'o' && chars[i+3] == 'm') && (Char.IsSeparator(chars[i+4]) || Char.IsPunctuation(chars[i+4])) && (chars[i+5].Equals("") || Char.IsSeparator(chars[i+5]) || Char.IsPunctuation(chars[i+5])))
 						{
 							Console.Write(number + ". ");
 							Console.WriteLine(str);
 						}
 					}
+				}
 				}
 				number++;
 			}
