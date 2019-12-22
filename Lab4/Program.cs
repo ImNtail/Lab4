@@ -281,7 +281,7 @@ namespace Lab4_SD
 						Console.Write(number + ". ");
 						Console.WriteLine(str);
 					}
-				else if (chars.Length > 4 && chars[chars.Length-1] == '.' && chars[chars.Length-2] == 'm' && chars[chars.Length-3] == 'o' && chars[chars.Length-4] == 'c' && chars[chars.Length-5] == '.')
+				else if (chars.Length > 4 && Char.IsPunctuation(chars[chars.Length-1]) && chars[chars.Length-2] == 'm' && chars[chars.Length-3] == 'o' && chars[chars.Length-4] == 'c' && chars[chars.Length-5] == '.')
 				{
 					Console.Write(number + ". ");
 					Console.WriteLine(str);
