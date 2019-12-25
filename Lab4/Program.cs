@@ -529,20 +529,21 @@ namespace Lab4_SD
 		*/
 		static void eighth()
 		{
-			Console.Write("Choose Atbash cipher(1), Vernam cipher(2) or simple single permutation cipher(3): ");
-			string s = Console.ReadLine();
-			if (s == "1")
-				atbash();
-			if (s == "2")
-				vernam();
-			if (s == "3")
-				permutation();
-		}
-		static void atbash()
-		{
 			Console.WriteLine("Enter the text: ");
 			string s = Console.ReadLine();
 			s = s.ToLower();
+			Console.Write("Choose Atbash cipher(1), Vernam cipher(2) or simple single permutation cipher(3): ");
+			string selector = Console.ReadLine();
+			Console.WriteLine();
+			if (selector == "1")
+				atbash(s);
+			if (selector == "2")
+				vernam(s);
+			if (selector == "3")
+				permutation(s);
+		}
+		static void atbash(string s)
+		{
 			Console.WriteLine();
 			string output = string.Empty;
 			foreach (char ch in s)
@@ -559,29 +560,26 @@ namespace Lab4_SD
 			Console.WriteLine(output);
 			Console.ReadKey();
 		}
-		static void vernam()
+		static void vernam(string s)
 		{
-			Console.WriteLine("Enter the text: ");
-			string s = Console.ReadLine();
-			s = s.ToLower();
+			char[] key = new char[s.Length];
+			Random rand = new Random();
+            for(int i = 0; i < s.Length; i++ )
+            {
+                key[i] = (char)(rand.Next() % 255);
+                Console.Write(key[i]);
+            }
 			Console.WriteLine("Enter the key: ");
-			string key = Console.ReadLine();
-			if (key.Length != s.Length)
-				return;
 			string vernamCipherText = string.Empty;
 			for (int i = 0; i < s.Length; i++)
 			{
 				vernamCipherText += (char)(s[i] ^ key[i]);
 			}
-			//Example:	cipher    (key: qwerty)-->    ↕▲§→◄♂	
 			Console.WriteLine(vernamCipherText);
 			Console.ReadKey();
 		}
-		static void permutation()
+		static void permutation(string s)
 		{
-			Console.WriteLine("Enter the text: ");
-			string s = Console.ReadLine();
-			s = s.ToLower();
 			Console.WriteLine("Enter the key: ");
 			string permutationKey = Console.ReadLine();
 			string permutatuionOutput = string.Empty;
